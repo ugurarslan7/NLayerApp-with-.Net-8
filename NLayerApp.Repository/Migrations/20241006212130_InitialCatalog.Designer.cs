@@ -12,7 +12,7 @@ using NLayerApp.Repository;
 namespace NLayerApp.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241006195812_InitialCatalog")]
+    [Migration("20241006212130_InitialCatalog")]
     partial class InitialCatalog
     {
         /// <inheritdoc />
@@ -46,7 +46,7 @@ namespace NLayerApp.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -108,7 +108,7 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4062),
+                            CreatedDate = new DateTime(2024, 10, 7, 0, 21, 29, 552, DateTimeKind.Local).AddTicks(5697),
                             Name = "İphone",
                             Price = 700m,
                             Stock = 50
@@ -117,7 +117,7 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4072),
+                            CreatedDate = new DateTime(2024, 10, 7, 0, 21, 29, 552, DateTimeKind.Local).AddTicks(5718),
                             Name = "Macbook",
                             Price = 1200m,
                             Stock = 50
@@ -126,7 +126,7 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4074),
+                            CreatedDate = new DateTime(2024, 10, 7, 0, 21, 29, 552, DateTimeKind.Local).AddTicks(5721),
                             Name = "Dell",
                             Price = 650m,
                             Stock = 50
@@ -135,7 +135,7 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 4,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4076),
+                            CreatedDate = new DateTime(2024, 10, 7, 0, 21, 29, 552, DateTimeKind.Local).AddTicks(5723),
                             Name = "Canon",
                             Price = 650m,
                             Stock = 50
