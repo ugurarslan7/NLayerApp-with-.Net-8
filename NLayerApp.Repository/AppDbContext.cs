@@ -23,8 +23,8 @@ namespace NLayerApp.Repository
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Category> Category;
-        public DbSet<Product> Product;
-        public DbSet<ProductFeature> ProductFeature;
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductFeature> ProductFeature { get; set; }
     }
 }

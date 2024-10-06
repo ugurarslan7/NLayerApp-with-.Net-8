@@ -5,6 +5,8 @@ using NLayerApp.Core.UnitOfWorks;
 using NLayerApp.Repository;
 using NLayerApp.Repository.Repositories;
 using NLayerApp.Repository.UnitOfWork;
+using NLayerApp.Service.Mapping;
+using NLayerApp.Service.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,14 +20,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepositroy<>)));
-//builder.Services.AddScoped(typeof(IService<>), (typeof(Service<>)));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IService<>), (typeof(Service<>)));
+builder.Services.AddScoped(typeof(IProductRepository), (typeof(ProductRepository)));
+builder.Services.AddScoped(typeof(IProductService), (typeof(ProductService)));
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
     {
-        option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+        option.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName);
     });
 });
 

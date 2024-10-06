@@ -12,7 +12,7 @@ using NLayerApp.Repository;
 namespace NLayerApp.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240929200106_InitialCatalog")]
+    [Migration("20241006195812_InitialCatalog")]
     partial class InitialCatalog
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace NLayerApp.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("NLayerApp.Core.Category", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace NLayerApp.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NLayerApp.Core.Product", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,14 +101,14 @@ namespace NLayerApp.Repository.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9227),
+                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4062),
                             Name = "İphone",
                             Price = 700m,
                             Stock = 50
@@ -117,7 +117,7 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9238),
+                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4072),
                             Name = "Macbook",
                             Price = 1200m,
                             Stock = 50
@@ -126,7 +126,7 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9240),
+                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4074),
                             Name = "Dell",
                             Price = 650m,
                             Stock = 50
@@ -135,14 +135,14 @@ namespace NLayerApp.Repository.Migrations
                         {
                             Id = 4,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9242),
+                            CreatedDate = new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4076),
                             Name = "Canon",
                             Price = 650m,
                             Stock = 50
                         });
                 });
 
-            modelBuilder.Entity("NLayerApp.Core.ProductFeature", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.ProductFeature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,9 +167,9 @@ namespace NLayerApp.Repository.Migrations
                     b.ToTable("ProductFeature");
                 });
 
-            modelBuilder.Entity("NLayerApp.Core.Product", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.Product", b =>
                 {
-                    b.HasOne("NLayerApp.Core.Category", "Category")
+                    b.HasOne("NLayerApp.Core.Model.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -178,23 +178,23 @@ namespace NLayerApp.Repository.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("NLayerApp.Core.ProductFeature", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.ProductFeature", b =>
                 {
-                    b.HasOne("NLayerApp.Core.Product", "Product")
+                    b.HasOne("NLayerApp.Core.Model.Product", "Product")
                         .WithOne("ProductFeature")
-                        .HasForeignKey("NLayerApp.Core.ProductFeature", "ProductId")
+                        .HasForeignKey("NLayerApp.Core.Model.ProductFeature", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("NLayerApp.Core.Category", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("NLayerApp.Core.Product", b =>
+            modelBuilder.Entity("NLayerApp.Core.Model.Product", b =>
                 {
                     b.Navigation("ProductFeature")
                         .IsRequired();

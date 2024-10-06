@@ -29,7 +29,7 @@ namespace NLayerApp.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -43,9 +43,9 @@ namespace NLayerApp.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
+                        name: "FK_Products_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id",
@@ -66,9 +66,9 @@ namespace NLayerApp.Repository.Migrations
                 {
                     table.PrimaryKey("PK_ProductFeature", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductFeature_Product_ProductId",
+                        name: "FK_ProductFeature_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -84,26 +84,26 @@ namespace NLayerApp.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Product",
+                table: "Products",
                 columns: new[] { "Id", "CategoryId", "CreatedDate", "Name", "Price", "Stock", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9227), "İphone", 700m, 50, null },
-                    { 2, 2, new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9238), "Macbook", 1200m, 50, null },
-                    { 3, 2, new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9240), "Dell", 650m, 50, null },
-                    { 4, 3, new DateTime(2024, 9, 29, 23, 1, 5, 218, DateTimeKind.Local).AddTicks(9242), "Canon", 650m, 50, null }
+                    { 1, 1, new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4062), "İphone", 700m, 50, null },
+                    { 2, 2, new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4072), "Macbook", 1200m, 50, null },
+                    { 3, 2, new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4074), "Dell", 650m, 50, null },
+                    { 4, 3, new DateTime(2024, 10, 6, 22, 58, 11, 218, DateTimeKind.Local).AddTicks(4076), "Canon", 650m, 50, null }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product",
-                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductFeature_ProductId",
                 table: "ProductFeature",
                 column: "ProductId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace NLayerApp.Repository.Migrations
                 name: "ProductFeature");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Category");
