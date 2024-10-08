@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLayerApp.API.Filters;
 using NLayerApp.Core.DTOs;
 using NLayerApp.Core.Model;
 using NLayerApp.Core.Services;
-using NLayerApp.Service.Services;
 using System.Collections.Generic;
 
 namespace NLayerApp.API.Controllers
@@ -14,7 +14,7 @@ namespace NLayerApp.API.Controllers
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
 
-        public ProductsController(IService<Product> service, IMapper mapper, IProductService productService)
+        public ProductsController(IMapper mapper, IProductService productService)
         {
             _mapper = mapper;
             _productService = productService;
@@ -36,6 +36,7 @@ namespace NLayerApp.API.Controllers
             return CreateActionResult(CustomResponseDto<List<ProductDto>>.Success(200, productsDtos));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
