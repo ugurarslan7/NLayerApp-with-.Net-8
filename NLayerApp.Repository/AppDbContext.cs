@@ -23,6 +23,57 @@ namespace NLayerApp.Repository
             base.OnModelCreating(modelBuilder);
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity baseEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                baseEntity.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(baseEntity).Property(p => p.CreatedDate).IsModified = false;
+                                baseEntity.UpdatedDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override int SaveChanges()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity baseEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                baseEntity.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(baseEntity).Property(p => p.CreatedDate).IsModified = false;
+                                baseEntity.UpdatedDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+            }
+
+            return base.SaveChanges();
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductFeature> ProductFeature { get; set; }
